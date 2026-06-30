@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 基建上游与物理限制中期研判报告</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Dark Theme Colors */
+            --bg-color: #080c14;
+            --sidebar-bg: #0f1524;
+            --card-bg: #131b2e;
+            --border-color: #1e2942;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.15);
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.15);
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --accent: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.15);
+            --sidebar-width: 260px;
+        }
+
+        [data-theme="light"] {
+            /* Light Theme Colors */
+            --bg-color: #f8fafc;
+            --sidebar-bg: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.1);
+            --success: #059669;
+            --success-glow: rgba(5, 150, 105, 0.1);
+            --warning: #d97706;
+            --danger: #dc2626;
+            --accent: #7c3aed;
+            --accent-glow: rgba(124, 58, 237, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Layout */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 32px 20px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-color);
+        }
+
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover {
+            background-color: var(--primary-glow);
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--primary-glow);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .sun-icon { display: none; }
+        .moon-icon { display: block; }
+
+        [data-theme="light"] .sun-icon { display: block; }
+        [data-theme="light"] .moon-icon { display: none; }
+
+        /* Main Content Area */
+        .main-layout {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 40px 50px;
+            max-width: 1300px;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.4) 0%, rgba(15, 23, 42, 0.4) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            margin: 0 0 12px 0;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            background: linear-gradient(to right, var(--text-color), #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .timestamp {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Sections and Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.15);
+            scroll-margin-top: 40px;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 24px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 28px 0 16px 0;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 24px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--sidebar-bg);
+            color: var(--text-color);
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            font-size: 0.85rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.015);
+        }
+
+        .num-col {
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Badges & Links */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .ticker-link, .table-ticker {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            padding: 3px 8px;
+            background-color: var(--primary-glow);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 6px;
+            color: var(--primary) !important;
+            display: inline-block;
+            font-size: 0.82rem;
+        }
+
+        .ticker-link:hover {
+            background-color: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--accent) !important;
+            text-decoration: none;
+        }
+
+        .score-badge {
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+
+        .score-high {
+            background-color: var(--success-glow);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score-med {
+            background-color: var(--primary-glow);
+            color: var(--primary);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .drift-pos {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .drift-neg {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .badge-penalty {
+            background-color: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+
+        /* Callouts / Alerts */
+        .callout {
+            padding: 24px;
+            margin: 28px 0;
+            border-radius: 14px;
+            border-left: 4px solid;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .callout-note {
+            background-color: var(--primary-glow);
+            border-left-color: var(--primary);
+            color: var(--text-color);
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+
+        /* Lists */
+        ul, ol {
+            padding-left: 24px;
+            margin: 16px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Horizontal rule */
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 32px 0;
+        }
+
+        p {
+            margin: 14px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 70px;
+                padding: 20px 10px;
+            }
+            .sidebar-brand {
+                justify-content: center;
+                margin-bottom: 24px;
+            }
+            .sidebar-brand span:not(.brand-dot) {
+                display: none;
+            }
+            .nav-item span:not(.nav-icon) {
+                display: none;
+            }
+            .nav-item {
+                justify-content: center;
+                padding: 12px;
+            }
+            .main-layout {
+                margin-left: 70px;
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-dot"></span>
+            <span>AI STOCKS</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#sec-1" class="nav-item active">
+                <span class="nav-icon">💡</span>
+                <span>1. 投资背景与核心逻辑</span>
+            </a>
+            <a href="#sec-2" class="nav-item">
+                <span class="nav-icon">🎯</span>
+                <span>2. 账户与持仓状态评估</span>
+            </a>
+            <a href="#sec-3" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span>3. 全美股观察列表评分</span>
+            </a>
+            <a href="#sec-4" class="nav-item">
+                <span class="nav-icon">🛡️</span>
+                <span>4. Chemours 特殊监控</span>
+            </a>
+            <a href="#sec-5" class="nav-item">
+                <span class="nav-icon">📈</span>
+                <span>5. 后续执行步骤</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-layout">
+        <header>
+            <h1>AI 基建上游与物理限制中期研判报告</h1>
+            <div class="timestamp">报告输出时间：2026-06-30 11:30</div>
+        </header>
+
+        <section id="sec-1" class="section-card">
+            
+<p>AI 基建（如 GPU 算力芯片、大模型研发）的第一阶段估值扩张已进入中后期，市场的主流逻辑正从单纯的“算力芯片预订”转向寻找<strong>支撑 AI 基建持续扩张的底层物理媒介、制造供应链瓶颈与良率提升核心环节</strong>，即“AI 基建后半场”的实体物理限制。</p>
+<p>本报告聚焦于以下六个核心物理层卡位与供应链瓶颈：</p>
+<ol>
+<li><strong>晶圆代工与先进封装 (Foundry &amp; Advanced Packaging)</strong>：先进 AI 逻辑芯片的唯一制造中心，以及 HBM 与逻辑芯片整合所必需的先进封装产能瓶颈 (<a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L12">TSM</a>)。</li>
+<li><strong>先进封装 (CoWoS/HBM) 与良率控制</strong>：随着硅堆叠与混合键合 (Hybrid Bonding) 的普及，3D 光学量测、测试探针卡与激光修复设备成为决定出厂良率的绝对物理瓶颈（<a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L11">ONTO</a>, <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L17">FORM</a>, <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L16">BESIY</a>, <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L18">NVMI</a>, <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L27">CAMT</a>）。</li>
+<li><strong>高频光电传输与 CPO 材料</strong>：1.6T 光模块、光电共封装 (CPO) 及高速连接所需的低损耗液晶聚合物 (LCP) 基树脂及高频特种板材 (<a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L13">ROG</a>)。</li>
+<li><strong>高效散热与液冷温控</strong>：Blackwell/Rubin 架构超高功率密度下的液冷/浸没式冷却液及冷却分配单元 (CDU)（<a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L14">MOD</a>, <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L20">VRT</a>, <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L26">NVT</a>）。</li>
+<li><strong>超高纯度半导体化学品与过滤</strong>：光刻、化学机械平坦化 (CMP) 等先进工艺中起防缺陷作用的全球领导者（<a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L15">ENTG</a>, <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L24">ESI</a>）。</li>
+<li><strong>高速信号物理层精密测试与电网硬件</strong>：1.6T 模块与高速接口验证系统，以及支撑数据中心超高功率用电的特种电网硬件（<a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L19">KEYS</a>, <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L26">NVT</a>）。</li>
+</ol>
+<hr/>
+
+        </section>
+
+        <section id="sec-2" class="section-card">
+            <h2>2. 账户与持仓状态评估</h2>
+<p>本研判及持仓分析仅限于用户的<strong>个人退休账户 (Roth IRA 账户 `790267983`)</strong>。普通个人经纪账户、联名账户及其他账户已自动排除。</p>
+<div class="callout callout-note">
+<div class="callout-title">💡 核心要点</div>
+<div class="callout-body">
+<p><strong>持仓与资产变化</strong>：当前账户总资产为 <strong>$17,331.91</strong>。</p>
+<ul>
+<li><strong>稳健持仓与偏离度</strong>：由于市场小幅波动，ONTO 的 50 日均线偏离度为 <strong>31.28%</strong>，继续被扣减 1.5 分的短期超买惩罚，总分为 <strong>44.84分</strong>。TSM 维持在 <strong>45.90分</strong>，位列第一。</li>
+<li><strong>漂移度保持极低</strong>：实际持仓权重与目标权重之间的偏差极小（ONTO 漂移为 +2.60% 为最大），整体组合结构极其稳定，无需任何被动再平衡。</li>
+<li><strong>无交易触发</strong>：目前没有持仓股触及估值泡沫止盈线。可用现金为 <strong>$0.95</strong>，无法进行现金建仓。同时，新晋优质候选股 <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L16">BESIY</a> (43.90分) 与持有的最低分个股 <a class="ticker-link" href="file:///Users/yuezh/AIStocks/candidate.md#L19">KEYS</a> (42.71分) 之间的分差仅为 <strong>1.19 分</strong>，远未达到 <strong>5 分</strong> 的换仓门槛。因此，本期<strong>坚定持有全部 6 只硬核标的，不进行任何调仓操作</strong>。</li>
+</ul>
+</div>
+</div>
+<h3>账户资产概况 (截至 2026-06-30 11:30)</h3>
+<ul>
+<li><strong>账户总资产 (Total Value)</strong>: <strong>$17,331.91</strong> (基于 Robinhood 实盘持仓与实时行情校准)</li>
+<li><strong>股票持仓市值 (Equity Value)</strong>: <strong>$17,330.96</strong> (占比 99.99%)</li>
+<li><strong>可用现金购买力 (Cash/Buying Power)</strong>: <strong>$0.95</strong> (占比 0.01%)</li>
+</ul>
+<h3>当前持仓明细 (6强组合)</h3>
+<div class="table-container">
+<table class="custom-table">
+<thead><tr>
+<th>股票代码</th>
+<th class="num-col">持有股数</th>
+<th>买入均价</th>
+<th class="num-col">当前价格</th>
+<th class="num-col">当前市值</th>
+<th class="num-col">实际权重</th>
+<th class="num-col">目标权重</th>
+<th class="num-col">漂移度 (Drift)</th>
+<th>50分制总分</th>
+<th>核心定位与评估</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="table-ticker">FORM</span></td>
+<td class="num-col">12.470417</td>
+<td>$335.19</td>
+<td class="num-col">$383.530</td>
+<td class="num-col">$4,782.78</td>
+<td class="num-col">27.60%</td>
+<td class="num-col">25.00%</td>
+<td class="num-col drift-pos">+2.60%</td>
+<td><span class="score-badge score-high">44.84</span></td>
+<td>3D 光学量测绝对霸主。HBM 堆叠与 CoWoS 封装良率控制 the absolute physical bottleneck, highly bound with software. <strong>第一基石，虽受超买罚分，仍坚定持有。</strong></td>
+</tr>
+<tr>
+<td><span class="table-ticker"></span></td>
+<td class="num-col">5.837872</td>
+<td>$439.72</td>
+<td class="num-col">$472.860</td>
+<td class="num-col">$2,760.50</td>
+<td class="num-col">15.93%</td>
+<td class="num-col">15.00%</td>
+<td class="num-col drift-pos">+0.93%</td>
+<td><span class="score-badge score-high">45.9</span></td>
+<td>全球先进工艺与 CoWoS 先进封装绝对垄断者，全球所有 AI 算力的终极物理枢纽与产能瓶颈。<strong>制造核心，本期评分第一，坚定持有。</strong></td>
+</tr>
+<tr>
+<td><span class="table-ticker"></span></td>
+<td class="num-col">15.254748</td>
+<td>$163.88</td>
+<td class="num-col">$164.840</td>
+<td class="num-col">$2,514.52</td>
+<td class="num-col">14.51%</td>
+<td class="num-col">15.00%</td>
+<td class="num-col drift-neg">-0.49%</td>
+<td><span class="score-badge score-high">44.5</span></td>
+<td>1.6T 光模块、CPO 以及高速连接所需的低损耗液晶聚合物 (LCP) 基板与高频特种板材的绝对领导者。<strong>高速材料核心，解除了超买，坚定持有。</strong></td>
+</tr>
+<tr>
+<td><span class="table-ticker"></span></td>
+<td class="num-col">9.298321</td>
+<td>$290.38</td>
+<td class="num-col">$266.480</td>
+<td class="num-col">$2,477.77</td>
+<td class="num-col">14.30%</td>
+<td class="num-col">15.00%</td>
+<td class="num-col drift-neg">-0.70%</td>
+<td><span class="score-badge score-high">44.13</span></td>
+<td>AI 数据中心高功率密度散热所需的冷却分配单元 (CDU) 稀缺龙头，下游超大型客群抢单，排他性强。<strong>液冷核心，坚定持有。</strong></td>
+</tr>
+<tr>
+<td><span class="table-ticker"></span></td>
+<td class="num-col">6.857393</td>
+<td>$364.57</td>
+<td class="num-col">$352.050</td>
+<td class="num-col">$2,414.11</td>
+<td class="num-col">13.93%</td>
+<td class="num-col">15.00%</td>
+<td class="num-col drift-neg">-1.07%</td>
+<td><span class="score-badge score-high">42.71</span></td>
+<td>用于 1.6T 光收发模块、高速 PCIe 接口等高速信号物理层精密测试与合规测试的绝对标准制定者。<strong>测试中坚，坚定持有。</strong></td>
+</tr>
+<tr>
+<td><span class="table-ticker"></span></td>
+<td class="num-col">15.194556</td>
+<td>$151.37</td>
+<td class="num-col">$156.720</td>
+<td class="num-col">$2,381.29</td>
+<td class="num-col">13.74%</td>
+<td class="num-col">13.00%</td>
+<td class="num-col drift-pos">+0.74%</td>
+<td><span class="score-badge score-high">43.29</span></td>
+<td>HBM 堆叠前筛选缺陷 DRAM Wafer 必不可少的探针卡垄断者，直接受益于 HBM 产能扩张与层数提升。<strong>测试耗材核心，继续坚定持有。</strong></td>
+</tr>
+<tr>
+<td><strong>现金</strong></td>
+<td class="num-col">-</td>
+<td>-</td>
+<td class="num-col">-</td>
+<td class="num-col">$0.95</td>
+<td class="num-col">0.01%</td>
+<td class="num-col">2.00%</td>
+<td class="num-col drift-neg">-1.99%</td>
+<td>-</td>
+<td>可用购买力。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr/>
+
+        </section>
+
+        <section id="sec-3" class="section-card">
+            <h2>3. 全美股观察列表 50 分制评分表</h2>
+<p>我们已抓取全观察列表的最新数据，并严格对照 `AGENTS.md` 规则进行了打分和降序排列：</p>
+<div class="table-container">
+<table class="custom-table">
+<thead><tr>
+<th>排名</th>
+<th>股票代码</th>
+<th>上游原材料 (10分)</th>
+<th>深厚护城河 (10分)</th>
+<th>主升浪未启动 (10分)</th>
+<th>机构建仓 (10分)</th>
+<th>市场定价权 (10分)</th>
+<th class="num-col"><strong>总得分</strong></th>
+<th class="num-col">Forward PEG</th>
+<th class="num-col">Forward PE</th>
+<th class="num-col">PB</th>
+<th class="num-col">50日线偏离度</th>
+<th class="num-col">偏离度惩罚</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="table-ticker">CAMT</span></td>
+<td>9.5</td>
+<td>10.0</td>
+<td>7.90</td>
+<td>9.0</td>
+<td>9.5</td>
+<td class="num-col"><span class="score-badge score-high">45.9</span></td>
+<td class="num-col">1.36</td>
+<td class="num-col">23.49</td>
+<td class="num-col">106.16</td>
+<td class="num-col">13.72%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="table-ticker"></span></td>
+<td>10.0</td>
+<td>9.5</td>
+<td>5.84</td>
+<td>9.5</td>
+<td>10.0</td>
+<td class="num-col"><span class="score-badge score-high">44.84</span></td>
+<td class="num-col">1.51</td>
+<td class="num-col">38.56</td>
+<td class="num-col">9.07</td>
+<td class="num-col">31.28%</td>
+<td class="num-col"><span class="badge-penalty">⚠️ -1.5分 (超买)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="table-ticker"></span></td>
+<td>8.5</td>
+<td>8.5</td>
+<td>9.50</td>
+<td>9.5</td>
+<td>8.5</td>
+<td class="num-col"><span class="score-badge score-high">44.5</span></td>
+<td class="num-col">0.52</td>
+<td class="num-col">37.75</td>
+<td class="num-col">2.46</td>
+<td class="num-col">15.19%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="table-ticker"></span></td>
+<td>8.0</td>
+<td>8.5</td>
+<td>9.13</td>
+<td>9.5</td>
+<td>9.0</td>
+<td class="num-col"><span class="score-badge score-high">44.13</span></td>
+<td class="num-col">1.11</td>
+<td class="num-col">23.45</td>
+<td class="num-col">11.78</td>
+<td class="num-col drift-neg">-1.49%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="table-ticker"></span></td>
+<td>9.5</td>
+<td>9.5</td>
+<td>6.40</td>
+<td>8.5</td>
+<td>10.0</td>
+<td class="num-col"><span class="score-badge score-high">43.9</span></td>
+<td class="num-col">1.64</td>
+<td class="num-col">N/A</td>
+<td class="num-col">50.22</td>
+<td class="num-col">4.05%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="table-ticker"></span></td>
+<td>9.0</td>
+<td>9.0</td>
+<td>7.79</td>
+<td>9.0</td>
+<td>8.5</td>
+<td class="num-col"><span class="score-badge score-high">43.29</span></td>
+<td class="num-col">1.39</td>
+<td class="num-col">56.15</td>
+<td class="num-col">11.54</td>
+<td class="num-col">15.32%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="table-ticker"></span></td>
+<td>9.0</td>
+<td>9.0</td>
+<td>7.53</td>
+<td>8.5</td>
+<td>9.0</td>
+<td class="num-col"><span class="score-badge score-high">43.03</span></td>
+<td class="num-col">1.46</td>
+<td class="num-col">42.01</td>
+<td class="num-col">13.10</td>
+<td class="num-col">4.36%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>8</td>
+<td><span class="table-ticker"></span></td>
+<td>8.0</td>
+<td>9.0</td>
+<td>7.71</td>
+<td>9.0</td>
+<td>9.0</td>
+<td class="num-col"><span class="score-badge score-high">42.71</span></td>
+<td class="num-col">1.41</td>
+<td class="num-col">29.69</td>
+<td class="num-col">9.50</td>
+<td class="num-col">1.42%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>9</td>
+<td><span class="table-ticker"></span></td>
+<td>10.0</td>
+<td>9.5</td>
+<td>4.05</td>
+<td>9.5</td>
+<td>9.5</td>
+<td class="num-col"><span class="score-badge score-high">42.55</span></td>
+<td class="num-col">1.98</td>
+<td class="num-col">38.46</td>
+<td class="num-col">6.69</td>
+<td class="num-col">20.51%</td>
+<td class="num-col"><span class="badge-penalty">⚠️ -1.5分 (超买)</span></td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="table-ticker"></span></td>
+<td>8.5</td>
+<td>8.5</td>
+<td>7.30</td>
+<td>9.0</td>
+<td>8.5</td>
+<td class="num-col"><span class="score-badge score-high">41.8</span></td>
+<td class="num-col">1.52</td>
+<td class="num-col">37.70</td>
+<td class="num-col">32.38</td>
+<td class="num-col">2.71%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>11</td>
+<td><span class="table-ticker"></span></td>
+<td>8.5</td>
+<td>8.5</td>
+<td>6.18</td>
+<td>9.5</td>
+<td>8.5</td>
+<td class="num-col"><span class="score-badge score-high">41.18</span></td>
+<td class="num-col">1.73</td>
+<td class="num-col">45.30</td>
+<td class="num-col">18.36</td>
+<td class="num-col drift-neg">-11.35%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>12</td>
+<td><span class="table-ticker"></span></td>
+<td>8.0</td>
+<td>8.5</td>
+<td>6.55</td>
+<td>9.5</td>
+<td>8.5</td>
+<td class="num-col"><span class="score-badge score-high">41.05</span></td>
+<td class="num-col">1.32</td>
+<td class="num-col">29.54</td>
+<td class="num-col">10.69</td>
+<td class="num-col">36.94%</td>
+<td class="num-col"><span class="badge-penalty">⚠️ -1.5分 (超买)</span></td>
+</tr>
+<tr>
+<td>13</td>
+<td><span class="table-ticker"></span></td>
+<td>9.5</td>
+<td>10.0</td>
+<td>1.00</td>
+<td>9.0</td>
+<td>10.0</td>
+<td class="num-col"><span class="score-badge score-high">39.5</span></td>
+<td class="num-col">2.57</td>
+<td class="num-col">59.49</td>
+<td class="num-col">67.62</td>
+<td class="num-col">46.53%</td>
+<td class="num-col"><span class="badge-penalty">⚠️ -1.5分 (超买)</span></td>
+</tr>
+<tr>
+<td>14</td>
+<td><span class="table-ticker"></span></td>
+<td>7.0</td>
+<td>8.5</td>
+<td>6.00</td>
+<td>9.5</td>
+<td>8.0</td>
+<td class="num-col"><span class="score-badge score-high">39.0</span></td>
+<td class="num-col">N/A</td>
+<td class="num-col">23.09</td>
+<td class="num-col">4.22</td>
+<td class="num-col">11.26%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>15</td>
+<td><span class="table-ticker"></span></td>
+<td>7.5</td>
+<td>7.5</td>
+<td>9.40</td>
+<td>8.5</td>
+<td>4.5</td>
+<td class="num-col"><span class="score-badge score-med">37.4</span></td>
+<td class="num-col">0.92</td>
+<td class="num-col">47.85</td>
+<td class="num-col">7.17</td>
+<td class="num-col">6.12%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>16</td>
+<td><span class="table-ticker"></span></td>
+<td>7.0</td>
+<td>7.5</td>
+<td>6.28</td>
+<td>9.0</td>
+<td>6.5</td>
+<td class="num-col"><span class="score-badge score-med">36.28</span></td>
+<td class="num-col">1.69</td>
+<td class="num-col">29.92</td>
+<td class="num-col">7.19</td>
+<td class="num-col">3.65%</td>
+<td class="num-col">无</td>
+</tr>
+<tr>
+<td>17</td>
+<td><span class="table-ticker"></span></td>
+<td>9.0</td>
+<td>8.5</td>
+<td>2.50</td>
+<td>7.0</td>
+<td>8.0</td>
+<td class="num-col"><span class="score-badge score-med">35.0</span></td>
+<td class="num-col">3.16</td>
+<td class="num-col">35.39</td>
+<td class="num-col">10.80</td>
+<td class="num-col drift-neg">-10.40%</td>
+<td class="num-col">无</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h3>📈 评级变化与估值分析</h3>
+<ol>
+<li><strong>ENTG (Entegris) - 评分降至 42.55 (降 1.50分)</strong>：由于近期股价上涨，其偏离 50 日均线达到 <strong>20.51%</strong>（越过了 20% 的硬性门槛），触发了 <strong>-1.5 分</strong> 的超买罚分。同时其 Forward PEG 从之前的较低水平小幅升至 <strong>1.98</strong>，导致主升浪得分下修至 <strong>4.05</strong>（不含罚分为 5.55）。其基本面过滤卡位依然极其优异，属于重点监控的建仓储备。</li>
+<li><strong>ONTO (Onto Innovation) - 评分维持在 44.84</strong>：股价偏离 50 日均线 <strong>31.28%</strong>，继续被扣减 <strong>1.5 分</strong> 偏离度惩罚，但基本面无虞。</li>
+<li><strong>MKSI (MKS Inc) - 评分维持在 41.05</strong>：股价偏离 50 日线达到 <strong>36.94%</strong>，继续扣减 <strong>1.5 分</strong> 偏离度惩罚。</li>
+<li><strong>KLAC (KLA Corp) - 评分维持在 39.50</strong>：股价偏离 50 日线达到 <strong>46.53%</strong>，扣减 <strong>1.5 分</strong> 偏离度惩罚，且 PEG 为 <strong>2.57</strong> 处于超买阶段。</li>
+</ol>
+<hr/>
+
+        </section>
+
+        <section id="sec-4" class="section-card">
+            <h2>4. Chemours (CC) PFAS 诉讼案特殊监控</h2>
+<p>根据 `AGENTS.md` 规则，针对 Chemours (CC) 的建仓前置条件为：<strong>“PFAS 诉讼案有官方积极更新/达成和解，或法律风险已实质性解决”</strong>。</p>
+<h3>最新诉讼与负债动态</h3>
+<ul>
+<li> <strong>4.5 亿美元联邦和解与地方政府拒绝</strong>：2026 年 6 月 26 日，Chemours 与美国环保署 (EPA) 达成了一项价值约 <strong>4.5 亿美元</strong> 的多州 PFAS 污染和解协议，包含 $2250 万的民事罚款以及未来 15 年内支付 $9000 万给受污染州。这是联邦层层面对主要 PFAS 制造商的首个综合和解。</li>
+<li> <strong>北卡罗来纳州强烈反对</strong>：然而，该协议遭到了北卡罗来纳州等地方政府的强烈抵制。北卡罗来纳州总检察长杰夫·杰克逊 (Jeff Jackson) 发表官方声明，痛批该交易为“背地里的交易”以及<strong>“对北卡罗来纳州东部人民的侮辱”</strong>，并明确指出该交易“对净化我们的水源几乎毫无作用”，其办公室将向 EPA 提出正式抗议并继续追究。</li>
+<li> <strong>研判结论</strong>：尽管联邦层面达成了和解，但<strong>地方州政府的强烈反对以及可能伴随的后续诉讼意味着该公司的 PFAS 法律与财务清偿风险并未“实质性解决”</strong>。4.5 亿美元的和解金额也将对公司本就脆弱的流动性（FCF 仅约 5100 万美元）造成沉重压力。<strong>因此，继续坚决维持淘汰状态，禁止任何建仓 CC 的行为，亦不将其列入观察池。</strong></li>
+</ul>
+<hr/>
+
+        </section>
+
+        <section id="sec-5" class="section-card">
+            <h2>5. 后续执行步骤 (Next Steps)</h2>
+<p>由于我们的组合已经完全重组为极高确信度的 <strong>“6强组合”</strong>，且目前资金分配极其精准，当前的后续步骤聚焦于组合的<strong>日常闭环监控</strong>与<strong>观察标的的动态评估</strong>：</p>
+<h3>1. 持仓日常监控与警戒阈值</h3>
+<ul>
+<li> <strong>再平衡警戒线</strong>：每日监控持仓权重，若某只个股的实际权重超出目标权重的 1.5 倍（即偏离超出 50% 阈值），则自动触发再平衡止盈：</li>
+<li> <strong>ONTO</strong> 警戒线: <strong>37.50%</strong> (当前 27.60%)</li>
+<li> <strong>MOD</strong> 警戒线: <strong>22.50%</strong> (当前 14.30%)</li>
+<li> <strong>TSM</strong> 警戒线: <strong>22.50%</strong> (当前 15.93%)</li>
+<li> <strong>ROG</strong> 警戒线: <strong>22.50%</strong> (当前 14.51%)</li>
+<li> <strong>KEYS</strong> 警戒线: <strong>22.50%</strong> (当前 13.93%)</li>
+<li> <strong>FORM</strong> 警戒线: <strong>19.50%</strong> (当前 13.74%)</li>
+<li> <strong>估值下调减仓警戒</strong>：若持仓股的 Forward PEG 提升导致“主升浪”得分跌破 <strong>4.5</strong>，则触发减仓 30%-50%；若跌破 <strong>3.5</strong>（泡沫化严重），则触发全额止盈。目前 6 只持仓的估值均处于健康或合理区间，未触发任何警报。</li>
+</ul>
+<h3>2. 细分领域排他性检查</h3>
+<p>持续遵守“每个细分领域仅持有一只最优质标的”的铁律。目前：</p>
+<ul>
+<li> <strong>光学量测</strong>：持有 ONTO (44.84分)，排他性不容许买入 NVMI (43.03分) 或 CAMT (35.00分)。</li>
+<li> <strong>LCP材料</strong>：持有 ROG (44.50分)，排他性不容许买入其他低分 LCP 标的。</li>
+<li> <strong>液冷温控</strong>：持有 MOD (44.13分)，排他性不容许买入 VRT (41.80分) 或 NVT (36.28分)。</li>
+<li>  组合无任何细分领域重合暴露，护城河结构极佳。</li>
+</ul>
+<h3>3. BESIY (Besi) 与 ENTG (Entegris) 的建仓储备与换仓条件</h3>
+<ul>
+<li> <strong>现状</strong>：`BESIY` 评分达 43.90 分，`ENTG` 评分达 42.55 分。两家公司所处的“混合键合”及“超高纯半导体化学品与过滤”细分领域在当前持仓中均处于空白状态，符合建仓条件。</li>
+<li> <strong>主动换仓触发条件</strong>：当前持有的最低分标的为 `KEYS` (42.71分)，与最高的非持仓候选股 `BESIY` (43.90分) 的分差为 <strong>1.19 分</strong>。根据规则，分差必须达到 <strong>$\ge$ 5 分</strong> 才能触发高分替代。因此当前不进行任何换仓。我们将密切监控两者的得分变化，一旦分差拉开至 5 分以上，将考虑清仓 KEYS 并全额换仓至 BESIY 或 ENTG。</li>
+</ul>
+<h3>4. 观察列表 (Watchlist) 同步与显示顺序确认</h3>
+<p>观察列表 `"AI Upstream"` 已在实盘中完成同步，我们将按照 <strong>LIFO 规则逆序写入</strong>，确保在 Robinhood 客户端中呈现最高确信度顺序。</p>
+
+        </section>
+    </div>
+
+    <script>
+        // Theme toggling logic
+        const toggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Load saved theme or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-theme', savedTheme);
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Highlight active nav item on scroll
+        const sections = document.querySelectorAll('.section-card');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').slice(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
