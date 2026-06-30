@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 基建上游与物理限制研判报告</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI 基建上游与物理限制研判报告</title>
+<style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: #24292f;
@@ -221,749 +222,624 @@
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>AI 基建上游与物理限制研判报告</h1>
-        <div class="timestamp">更新时间：2026-06-30 09:30</div>
-    </header>
-
-    <!-- 1. 投资背景与核心逻辑 -->
-    <section class="section-box">
-        <h2 style="margin-top:0; border:none; padding:0;">投资背景与核心逻辑</h2>
-        <p style="font-size: 14px; margin: 0 0 12px 0;">
+<header>
+<h1>AI 基建上游与物理限制研判报告</h1>
+<div class="timestamp">更新时间：2026-06-30 11:30</div>
+</header>
+<!-- 1. 投资背景与核心逻辑 -->
+<section class="section-box">
+<h2 style="margin-top:0; border:none; padding:0;">投资背景与核心逻辑</h2>
+<p style="font-size: 14px; margin: 0 0 12px 0;">
             AI 基建（如 GPU 算力芯片、大模型研发）的第一阶段估值扩张已进入中后期，市场的主流逻辑正从单纯的“算力芯片预订”转向寻找<strong>支撑 AI 基建持续扩张的底层物理媒介、制造供应链瓶颈与良率提升核心环节</strong>，即“AI 基建后半场”的实体物理限制。
         </p>
-        <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">本报告聚焦于以下六个核心物理层卡位与供应链瓶颈：</p>
-        <ul class="intro-list">
-            <li><strong>1. 晶圆代工与先进封装 (Foundry & Advanced Packaging)</strong>：先进 AI 逻辑芯片的唯一制造中心，以及 HBM 与逻辑芯片整合所必需的先进封装产能瓶颈 (TSM)。</li>
-            <li><strong>2. 先进封装 (CoWoS/HBM) 与良率控制</strong>：随着硅堆叠与混合键合的普及，3D 光学量测与测试探针卡成为决定出厂良率的绝对物理瓶颈 (ONTO, FORM, BESIY, NVMI, CAMT)。</li>
-            <li><strong>3. 高频光电传输与 CPO 材料</strong>：1.6T 光模块、光电共封装 (CPO) 及高速连接所需的低损耗液晶聚合物 (LCP) 基板材料 (ROG)。</li>
-            <li><strong>4. 高效散热与液冷温控</strong>：Blackwell/Rubin 架构超高功率密度下的液冷/浸没式冷却液及冷却分配单元 (CDU) (MOD, VRT, NVT)。</li>
-            <li><strong>5. 超高纯半导体化学品与过滤</strong>：光刻、化学机械平坦化 (CMP) 等先进工艺中起关键防缺陷与过滤作用的全球领导者 (ENTG, ESI)。</li>
-            <li><strong>6. 信号精密测试与电网硬件</strong>：用于 1.6T 模块与高速接口验证系统，以及支撑数据中心超高功率用电的特种电网设备 (KEYS, NVT)。</li>
-        </ul>
-    </section>
+<p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">本报告聚焦于以下六个核心物理层卡位与供应链瓶颈：</p>
+<ul class="intro-list">
+<li><strong>1. 晶圆代工与先进封装 (Foundry &amp; Advanced Packaging)</strong>：先进 AI 逻辑芯片的唯一制造中心，以及 HBM 与逻辑芯片整合所必需的先进封装产能瓶颈 (TSM)。</li>
+<li><strong>2. 先进封装 (CoWoS/HBM) 与良率控制</strong>：随着硅堆叠与混合键合的普及，3D 光学量测与测试探针卡成为决定出厂良率的绝对物理瓶颈 (ONTO, FORM, BESIY, NVMI, CAMT)。</li>
+<li><strong>3. 高频光电传输与 CPO 材料</strong>：1.6T 光模块、光电共封装 (CPO) 及高速连接所需的低损耗液晶聚合物 (LCP) 基板材料 (ROG)。</li>
+<li><strong>4. 高效散热与液冷温控</strong>：Blackwell/Rubin 架构超高功率密度下的液冷/浸没式冷却液及冷却分配单元 (CDU) (MOD, VRT, NVT)。</li>
+<li><strong>5. 超高纯半导体化学品与过滤</strong>：光刻、化学机械平坦化 (CMP) 等先进工艺中起关键防缺陷与过滤作用的全球领导者 (ENTG, ESI)。</li>
+<li><strong>6. 信号精密测试与电网硬件</strong>：用于 1.6T 模块与高速接口验证系统，以及支撑数据中心超高功率用电的特种电网设备 (KEYS, NVT)。</li>
+</ul>
+</section>
+<!-- 2. 数据总览 -->
+<div class="stats-summary">
+<div class="stat-item">
+<span class="stat-label">跟踪标的总数</span>
+<span class="stat-value">17 只</span>
+</div>
+<div class="stat-item">
+<span class="stat-label">核心配置标的</span>
+<span class="stat-value">6 只</span>
+</div>
+<div class="stat-item">
+<span class="stat-label">优质储备候选</span>
+<span class="stat-value">8 只</span>
+</div>
+<div class="stat-item">
+<span class="stat-label">轻仓观察标的</span>
+<span class="stat-value">3 只</span>
+</div>
+</div>
+<h2>全美股观察池评估列表（共17只，按总得分降序排列）</h2>
+<!-- Stock Cards -->
+<!-- 1. TSM -->
 
-    <!-- 2. 数据总览 -->
-    <div class="stats-summary">
-        <div class="stat-item">
-            <span class="stat-label">跟踪标的总数</span>
-            <span class="stat-value">17 只</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">核心配置标的</span>
-            <span class="stat-value">6 只</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">优质储备候选</span>
-            <span class="stat-value">8 只</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">轻仓观察标的</span>
-            <span class="stat-value">3 只</span>
-        </div>
-    </div>
+<!-- 2. ONTO -->
 
-    <h2>全美股观察池评估列表（共17只，按总得分降序排列）</h2>
+<!-- 3. ROG -->
 
-    <!-- Stock Cards -->
-    
-    <!-- 1. TSM -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">TSM <span class="stock-name">台积电 (Taiwan Semiconductor Mfg)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-portfolio">核心配置</span>
-                <span class="score-box">45.90 分</span>
-            </div>
-        </div>
-        <div class="summary-text">全球先进工艺（3nm/2nm）与先进封装（CoWoS）绝对垄断者，全球所有 AI 算力的终极物理枢纽与产能瓶颈。制造核心，本期评分第一，坚定持有。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (9.5/10)</th>
-                <td>Critical/Bottleneck级先进代工与封装，AI算力无可替代的物理载体。营收纯度极高。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (10.0/10)</th>
-                <td>3nm/2nm先进制程工艺独占性，CoWoS封装技术与产能绝对垄断，客户转换成本无限高。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (7.9/10)</th>
-                <td>Forward PEG 1.36 估值合理，股价偏离50日线 13.07% 处于健康上行通道，无超买扣分。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.0/10)</th>
-                <td>全球顶级机构及主权基金核心底仓，近期筹码锁定良好，量价配合健康。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (9.5/10)</th>
-                <td>先进制程供不应求，苹果、英伟达等巨头抢占产能，拥有极强的价格制定权。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.36</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">23.36</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">105.55</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">13.07%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 4. MOD -->
 
-    <!-- 2. ONTO -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">ONTO <span class="stock-name">昂图创新 (Onto Innovation Inc.)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-portfolio">核心配置</span>
-                <span class="score-box">44.84 分</span>
-            </div>
-        </div>
-        <div class="summary-text">3D 光学量测绝对霸主。HBM 堆叠与 CoWoS 封装良率控制的绝对物理瓶颈，与软件高度绑定。第一基石，虽受超买罚分，仍坚定持有。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (10.0/10)</th>
-                <td>Bottleneck级 3D 光学量测设备，HBM 堆叠与 CoWoS 封装良率控制的绝对物理瓶颈，高纯度。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (9.5/10)</th>
-                <td>独占 3D 量测机台，高转换壁垒与软硬一体化生态。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (5.84/10)</th>
-                <td>PEG 1.51 估值合理，但由于近期股价大涨偏离50日线达 31.37%，触发短期超买惩罚扣减 1.5 分。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.5/10)</th>
-                <td>机构持仓比例极高，周/月K线呈完美的杯柄底或收缩波动形态，大资金建仓显著。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (10.0/10)</th>
-                <td>在细分量测机台拥有绝对技术垄断与定价权，下游客户必须采购以维持良率，免受价格战。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.51</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">38.59</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">9.08</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">31.37%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="penalty-text">⚠️ -1.5分 (短期严重超买)</span></div>
-        </div>
-    </div>
+<!-- 5. ENTG -->
 
-    <!-- 3. ROG -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">ROG <span class="stock-name">罗杰斯 (Rogers Corporation)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-portfolio">核心配置</span>
-                <span class="score-box">44.50 分</span>
-            </div>
-        </div>
-        <div class="summary-text">1.6T 光模块、CPO 以及高速连接所需的低损耗液晶聚合物 (LCP) 基板与高频特种板材的绝对领导者。由于股价回调超买解除，评分大幅回升。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (8.5/10)</th>
-                <td>Critical级 LCP 高频传输树脂及特种板材，1.6T 光模块与 CPO 不可或缺 of 物理介质。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (8.5/10)</th>
-                <td>高频通信板材专利与技术积累深厚，新进入者门槛高。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (9.5/10)</th>
-                <td>Forward PEG 0.52 处于历史绝对低估值区间，股价回调后偏离度仅 15.34%，超买解除，安全边际高。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.5/10)</th>
-                <td>机构持股非常集中，近期在底部缩量整理，有明显的 Smart Money 护盘与筑底迹象。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (8.5/10)</th>
-                <td>属于低单价、高黏性的核心耗材，客户转换成本高，受价格敏感度低。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">0.52</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">37.80</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">2.46</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">15.34%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 6. BESIY -->
 
-    <!-- 4. MOD -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">MOD <span class="stock-name">摩丁制造 (Modine Manufacturing)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-portfolio">核心配置</span>
-                <span class="score-box">44.13 分</span>
-            </div>
-        </div>
-        <div class="summary-text">AI 数据中心高功率密度散热所需的冷却分配单元 (CDU) 稀缺龙头，下游超大型客群抢单，排他性强。液冷核心，坚定持有。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (8.0/10)</th>
-                <td>Critical级冷却分配单元 (CDU)，Blackwell 高功率散热核心。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (8.5/10)</th>
-                <td>定制工程能力强，与超大规模数据中心客户深度绑定。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (9.13/10)</th>
-                <td>PEG 1.11 处于低估区间，股价调整充分（偏离度 -2.45%），处于安全建仓位。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.5/10)</th>
-                <td>主流机构持续加仓，量价关系极其健康，整理充分。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (9.0/10)</th>
-                <td>液冷核心部件供求关系极其紧缺，下游争相签排他性协议锁产能，价格保护力度极强。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.11</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">23.22</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">11.66</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">-2.45%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 7. FORM -->
 
-    <!-- 5. ENTG -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">ENTG <span class="stock-name">英特格 (Entegris, Inc.)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-candidate">优质候选股</span>
-                <span class="score-box">44.05 分</span>
-            </div>
-        </div>
-        <div class="summary-text">先进工艺中起关键防缺陷作用的超高纯化学过滤器、特种化学品及高纯输送容器的全球领导者。因估值消化且超买解除，评分大增。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (10.0/10)</th>
-                <td>Bottleneck级超高纯化学过滤器与高纯输送容器，先进工艺防缺陷良率控制全球唯一选择。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (9.5/10)</th>
-                <td>极高材料科学壁垒与客户长期产线认证壁垒，基本无替代可能。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (5.55/10)</th>
-                <td>PEG 1.98 偏高，估值适度透支，偏离度 19.37% 处于超买警戒线边缘。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.5/10)</th>
-                <td>机构高度重仓，走势强劲，呈现大资金持续建仓的良性爬升态势。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (9.5/10)</th>
-                <td>核心高复购耗材，对良率影响极大但占总成本低，客户对价格不敏感，定价权高。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.98</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">38.08</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">6.62</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">19.37%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 8. NVMI -->
 
-    <!-- 6. BESIY -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">BESIY <span class="stock-name">贝思半导体 (Besi)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-candidate">优质候选股</span>
-                <span class="score-box">43.90 分</span>
-            </div>
-        </div>
-        <div class="summary-text">独占先进封装混合键合 (Hybrid Bonding) 设备市场，是 HBM4 及未来 3D 堆叠良率的物理极极限点。估值回归合理区间。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (9.5/10)</th>
-                <td>Bottleneck级先进封装混合键合 (Hybrid Bonding) 设备，HBM4 及未来 3D 堆叠良率的绝对瓶颈。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (9.5/10)</th>
-                <td>独占混合键合设备市场，专利壁垒与客户先发优势确立绝对护城河。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (6.40/10)</th>
-                <td>PEG 1.64 估值合理，股价近期横盘整理，偏离度仅 3.56%，超买完全消化。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (8.5/10)</th>
-                <td>欧洲半导体核心资产，长线外资与主权基金持续买入锁定。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (10.0/10)</th>
-                <td>几乎独占当前混合键合市场，毛利率维持极高水平，拥有强定价权。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.64</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">N/A</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">49.98</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">3.56%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 9. KEYS -->
 
-    <!-- 7. FORM -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">FORM <span class="stock-name">福美拓 (FormFactor, Inc.)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-portfolio">核心配置</span>
-                <span class="score-box">43.29 分</span>
-            </div>
-        </div>
-        <div class="summary-text">HBM 堆叠前筛选缺陷 DRAM Wafer 必不可少的探针卡垄断者，直接受益于 HBM 产能扩张与层数提升。测试耗材核心，继续坚定持有。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (9.0/10)</th>
-                <td>Critical/Bottleneck级探针卡测试耗材，HBM 堆叠前 DRAM 晶圆筛选的唯一物理关卡。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (9.0/10)</th>
-                <td>MEMS 探针技术壁垒，与美光、SK海力士等主流 DRAM 厂深度绑定。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (7.79/10)</th>
-                <td>PEG 1.39 估值处于合理区间，近期技术形态在均线上方良性震荡。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.0/10)</th>
-                <td>机构持仓比重高，近期量价配合健康，呈收缩整理走势。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (8.5/10)</th>
-                <td>高黏性、高复购半导体消耗品，客户对测试精确度要求极高，价格竞争压力低。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.39</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">55.01</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">11.31</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">13.05%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 10. VRT -->
 
-    <!-- 8. NVMI -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">NVMI <span class="stock-name">新星量测 (Nova Ltd.)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-candidate">优质候选股</span>
-                <span class="score-box">43.03 分</span>
-            </div>
-        </div>
-        <div class="summary-text">半导体工艺中高精度集成与独立光学量测系统的领军者，先进封装及前道量测的关键卡位。与 ONTO 属于同细分领域，受排他性规则限制无法同时持有。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (9.0/10)</th>
-                <td>Critical级光学量测，半导体前道与先进封装中高精度量测的领军者。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (9.0/10)</th>
-                <td>光学量测卡位极佳，软硬件与设备厂商产线高度集成。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (7.53/10)</th>
-                <td>PEG 1.46 估值合理，近期股价跟随板块回调，偏离度仅 3.61%，已无超买。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (8.5/10)</th>
-                <td>机构配置稳定，走势稳健，处于中线蓄势筑底阶段。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (9.0/10)</th>
-                <td>与客户深度定制，毛利率长期维持在 60% 以上，防御性强。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.46</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">41.70</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">13.01</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">3.61%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 11. MPWR -->
 
-    <!-- 9. KEYS -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">KEYS <span class="stock-name">是德科技 (Keysight Technologies)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-portfolio">核心配置</span>
-                <span class="score-box">42.71 分</span>
-            </div>
-        </div>
-        <div class="summary-text">用于 1.6T 光收发模块、高速 PCIe 接口等高速信号物理层精密测试与合规测试的绝对标准制定者。测试中坚，坚定持有。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (8.0/10)</th>
-                <td>Critical级高速信号物理层精密测试仪器，1.6T 光收发与高速接口标准制定者。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (9.0/10)</th>
-                <td>高端电子测试仪器壁垒，行业标准与软硬件生态壁垒极高，难以被替代。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (7.71/10)</th>
-                <td>PEG 1.41 估值合理，股价处于底部良性筑底并温和向上形态。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.0/10)</th>
-                <td>机构长线底仓极其稳定，近期见大资金平稳流入。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (9.0/10)</th>
-                <td>高端测试仪器领域竞争格局极佳，产品议价能力强，无价格战风险。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.41</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">29.52</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">9.44</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">0.85%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 12. MKSI -->
 
-    <!-- 10. VRT -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">VRT <span class="stock-name">维谛技术 (Vertiv Holdings Co)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-candidate">优质候选股</span>
-                <span class="score-box">41.80 分</span>
-            </div>
-        </div>
-        <div class="summary-text">全球数据中心电力分配与冷却系统的巨头，提供高功率散热与不间断电源整体解决方案。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (8.5/10)</th>
-                <td>Critical级数据中心电源与高功率冷却系统，AI 算力中心能源效率的核心。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (8.5/10)</th>
-                <td>规模化制造优势，全球庞大的服务及销售网络，客户替换成本高。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (7.30/10)</th>
-                <td>PEG 1.52 估值适中，近期股价在高位横盘进行箱体整理。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.0/10)</th>
-                <td>机构高度重仓，走势为典范的上升通道，筹码结构健康。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (8.5/10)</th>
-                <td>整体解决方案极具粘性，但面临其他电气设备巨头（如 Eaton）的温和同业竞争。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.52</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">37.11</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">31.88</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">1.16%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 13. KLAC -->
 
-    <!-- 11. MPWR -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">MPWR <span class="stock-name">芯源系统 (Monolithic Power Systems)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-candidate">优质候选股</span>
-                <span class="score-box">41.18 分</span>
-            </div>
-        </div>
-        <div class="summary-text">先进 GPU 供电系统（如 Blackwell/Rubin 架构）所需的超高功率密度电源管理芯片与模块垄断者。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (8.5/10)</th>
-                <td>Critical级超高功率密度电源管理芯片与模块，Blackwell 等大功率 GPU 供电系统核心。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (8.5/10)</th>
-                <td>拥有专利的高集成度电源设计，技术领先同行 1-2 代。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (6.18/10)</th>
-                <td>PEG 1.73 估值偏高，但股价回调已跌破50日线（偏离度 -13.00%），处于估值修复阶段。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.5/10)</th>
-                <td>机构持仓密集，量价健康，回调中未见机构恐慌性抛售。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (8.5/10)</th>
-                <td>凭借技术代差在 Blackwell 供电模块中卡位极佳，但需防范 TI 等传统电源巨头中长期的拼单竞争。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.73</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">44.45</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">18.01</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">-13.00%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 14. ESI -->
 
-    <!-- 12. MKSI -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">MKSI <span class="stock-name">万机仪器 (MKS Inc.)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-candidate">优质候选股</span>
-                <span class="score-box">41.05 分</span>
-            </div>
-        </div>
-        <div class="summary-text">提供先进光刻、沉积和蚀刻工艺所需的超精密激光器、真空系统与射频电源子系统。目前仍处于短期偏离度超买惩罚中。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (8.0/10)</th>
-                <td>Critical级超精密激光器与真空射频电源，先进光刻与蚀刻设备的底层核心零部件。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (8.5/10)</th>
-                <td>半导体核心零部件的极高壁垒，占据全球主要半导体设备厂供应链。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (6.55/10)</th>
-                <td>PEG 1.32 虽合理，但由于股价短期拉升偏离50日线达 34.47%，触发超买扣减 1.5 分。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.5/10)</th>
-                <td>机构大额扫货，日K线呈加速上行状态，大资金建仓极其明显。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (8.5/10)</th>
-                <td>关键零部件独占性高，随设备厂需求增长而具备良好转嫁成本能力。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.32</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">29.00</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">10.49</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">34.47%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="penalty-text">⚠️ -1.5分 (短期严重超买)</span></div>
-        </div>
-    </div>
+<!-- 15. COHR -->
 
-    <!-- 13. KLAC -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">KLAC <span class="stock-name">科磊 (KLA Corporation)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-candidate">优质候选股</span>
-                <span class="score-box">39.50 分</span>
-            </div>
-        </div>
-        <div class="summary-text">全球晶圆前道检测设备的绝对垄断者，控制着半导体制造的基准良率。由于股价过度偏离50日线，被罚分且估值偏高，适合观望回调。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (9.5/10)</th>
-                <td>Bottleneck级晶圆前道量测与检测设备绝对垄断者，半导体制造良率控制的核心基石。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (10.0/10)</th>
-                <td>在晶圆缺陷检测领域拥有无可挑战的垄断地位，专利与客户壁垒坚不可摧。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (1.00/10)</th>
-                <td>Forward PEG 2.57 估值已进入严重泡沫区，且超买偏离度达 44.82%（扣 1.5 分），短期性价比极低。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.0/10)</th>
-                <td>机构长期底仓稳定，但高位量能异常放大，显示部分大资金在派发获利盘。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (10.0/10)</th>
-                <td>设备垄断定价权极强，不受任何价格战威胁，毛利率极高。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">2.57</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">58.77</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">66.81</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">44.82%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="penalty-text">⚠️ -1.5分 (超买且估值超2.5)</span></div>
-        </div>
-    </div>
+<!-- 16. NVT -->
 
-    <!-- 14. ESI -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">ESI <span class="stock-name">爱力盟特 (Element Solutions)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-candidate">优质候选股</span>
-                <span class="score-box">39.00 分</span>
-            </div>
-        </div>
-        <div class="summary-text">提供先进封装（如混合键合、凸点制造）所需的超高纯电镀化学品与工艺材料，高黏性高频复购，因传统业务占比偏多被稀释纯度。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (7.0/10)</th>
-                <td>Critical级先进封装工艺化学品，但由于公司属于大型综合化工集团，AI营收纯度受传统业务稀释，扣 1.0 分。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (8.5/10)</th>
-                <td>湿化学电镀配方专利及长期产线认证，客户轻易不作更换。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (6.00/10)</th>
-                <td>前瞻 PE 23x 偏高，PEG 缺失，当前估值处于历史中高位，性价比较为中等。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.5/10)</th>
-                <td>化学巨头股权高度集中，大资金锁定良好，近期图形呈温和整理。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (8.0/10)</th>
-                <td>耗材粘性高，但由于非单一供应商，面临来自其他特种化学品公司的温和竞争。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">N/A</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">23.09</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">4.22</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">11.26%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
+<!-- 17. CAMT -->
 
-    <!-- 15. COHR -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">COHR <span class="stock-name">高意 (Coherent Corp.)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-watchlist">观察标的</span>
-                <span class="score-box">37.40 分</span>
-            </div>
-        </div>
-        <div class="summary-text">高速光模块（如 800G/1.6T）及相关核心光电器件供应商。估值虽低，但下游客户过于强势且同业拼价严重，毛利波动大，未达38分建仓线。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (7.5/10)</th>
-                <td>Critical级 800G/1.6T 光模块及核心光电器件，但光模块产业链偏下游，纯度中等。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (7.5/10)</th>
-                <td>具备从磷化铟光芯片到模块的垂直整合能力，但行业代际迭代快，壁垒不够高。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (9.40/10)</th>
-                <td>PEG 0.92 估值低廉，股价调整充分，具有良好的估值性价比。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (8.5/10)</th>
-                <td>机构配置尚可，但板块波动巨大，资金进出较为频繁。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (4.5/10)</th>
-                <td>极其致命的弱点。下游 Hyperscaler 客户极度强势，同业低价竞争激烈，毛利率存在巨大挤压风险，无定价权。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">0.92</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">47.23</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">7.07</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">4.77%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
-
-    <!-- 16. NVT -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">NVT <span class="stock-name">埃文特 (nVent Electric plc)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-watchlist">观察标的</span>
-                <span class="score-box">36.28 分</span>
-            </div>
-        </div>
-        <div class="summary-text">提供数据中心高密度机架、智能配电单元及机柜液冷连接管道，属于电网硬件关键卡位。因整体业务中传统电气占比较多，纯度被稀释。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (7.0/10)</th>
-                <td>Critical级机架机柜，整体业务中传统电气占比较多，纯度被稀释，扣 1.0 分。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (7.5/10)</th>
-                <td>依赖工程分销渠道与安规认证壁垒，物理壁垒低于液冷CDU。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (6.28/10)</th>
-                <td>PEG 1.69，估值偏高，升势有所放缓，性价比一般。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (9.0/10)</th>
-                <td>机构底仓稳定，图形处于高位良性横盘中。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (6.5/10)</th>
-                <td>机柜/机架同质化程度高于 CDU，面临一定同业竞争，毛利率承压。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">1.69</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">29.59</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">7.11</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">2.52%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="metric-val">无</span></div>
-        </div>
-    </div>
-
-    <!-- 17. CAMT -->
-    <div class="stock-card">
-        <div class="stock-header">
-            <div class="stock-title">CAMT <span class="stock-name">康特科技 (Camtek Ltd.)</span></div>
-            <div class="stock-badges">
-                <span class="badge badge-watchlist">观察标的</span>
-                <span class="score-box">35.00 分</span>
-            </div>
-        </div>
-        <div class="summary-text">提供先进封装与 CMOS 图像传感器的自动光学检测 (AOI) 和量测设备，当前估值严重透支，技术指标走弱，处于观望区。</div>
-        <table>
-            <tr>
-                <th>AI基建上游原材料 (9.0/10)</th>
-                <td>Critical级先进封装自动外观缺陷检测 (AOI) 设备。</td>
-            </tr>
-            <tr>
-                <th>深厚护城河 (8.5/10)</th>
-                <td>在先进封装检测中具有较好卡位，但综合实力和软件绑定程度弱于 ONTO。</td>
-            </tr>
-            <tr>
-                <th>主升浪未完全启动 (2.50/10)</th>
-                <td>Forward PEG 3.16 估值极度透支，属于高位泡沫区，性价比极低。</td>
-            </tr>
-            <tr>
-                <th>机构建仓痕迹 (7.0/10)</th>
-                <td>股价技术形态呈破位下行，近期有机构资金净流出迹象。</td>
-            </tr>
-            <tr>
-                <th>定价权与防价格战 (8.0/10)</th>
-                <td>面临来自 ONTO、中科飞测等同业竞争，但封装检测设备的客户黏性依然存在。</td>
-            </tr>
-        </table>
-        <div class="metrics-bar">
-            <div class="metric-item"><span class="metric-label">Forward PEG:</span> <span class="metric-val">3.16</span></div>
-            <div class="metric-item"><span class="metric-label">Forward PE:</span> <span class="metric-val">35.48</span></div>
-            <div class="metric-item"><span class="metric-label">PB Ratio:</span> <span class="metric-val">10.83</span></div>
-            <div class="metric-item"><span class="metric-label">50日均线偏离:</span> <span class="metric-val">-10.17%</span></div>
-            <div class="metric-item"><span class="metric-label">偏离度惩罚:</span> <span class="penalty-text">⚠️ 估值超 2.5 泡沫区</span></div>
-        </div>
-    </div>
-
-</body>
+<div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">TSM <span class="stock-name">台积电 (Taiwan Semiconductor Mfg)</span></div>
+<div class="stock-badges">
+<span class="badge badge-portfolio">核心配置</span>
+<span class="score-box">45.90 分</span>
+</div>
+</div>
+<div class="summary-text">全球先进工艺（3nm/2nm）与先进封装（CoWoS）绝对垄断者，全球所有 AI 算力的终极物理枢纽与产能瓶颈。制造核心，本期评分第一，坚定持有。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (9.5/10)</th>
+<td>Critical/Bottleneck级先进代工与封装，AI算力无可替代的物理载体。营收纯度极高。</td>
+</tr>
+<tr>
+<th>深厚护城河 (10.0/10)</th>
+<td>3nm/2nm先进制程工艺独占性，CoWoS封装技术与产能绝对垄断，客户转换成本无限高。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (7.90/10)</th>
+<td>Forward PEG 1.36 估值合理，高增长能有效匹配，股价偏离50日线 13.72% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.0/10)</th>
+<td>全球顶级机构及主权基金核心底仓，近期筹码锁定良好，量价配合健康。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (9.5/10)</th>
+<td>先进制程供不应求，苹果、英伟达等巨头抢占产能，拥有极强的价格制定权。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.36 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 23.49 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 106.16 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 13.72% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">ONTO <span class="stock-name">昂图创新 (Onto Innovation Inc.)</span></div>
+<div class="stock-badges">
+<span class="badge badge-portfolio">核心配置</span>
+<span class="score-box">44.84 分</span>
+</div>
+</div>
+<div class="summary-text">3D 光学量测绝对霸主。HBM 堆叠与 CoWoS 封装良率控制的绝对物理瓶颈，与软件高度绑定。第一基石，虽受超买罚分，仍坚定持有。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (10.0/10)</th>
+<td>Bottleneck级 3D 光学量测设备，HBM 堆叠与 CoWoS 封装良率控制的绝对物理瓶颈，高纯度。</td>
+</tr>
+<tr>
+<th>深厚护城河 (9.5/10)</th>
+<td>独占 3D 量测机台，高转换壁垒与软硬一体化生态。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (5.84/10)</th>
+<td>Forward PEG 1.51 估值合理，高增长能有效匹配，但由于近期股价大涨偏离50日线达 31.28%，触发短期超买惩罚扣减 1.5 分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.5/10)</th>
+<td>机构持仓比例极高，周/月K线呈完美的杯柄底或收缩波动形态，大资金建仓显著。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (10.0/10)</th>
+<td>在细分量测机台拥有绝对技术垄断与定价权，下游客户必须采购以维持良率，免受价格战。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.51 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 38.56 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 9.07 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 31.28% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class="penalty-text" class_="metric-val"> ⚠️ -1.5分 (短期严重超买)</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">ROG <span class="stock-name">罗杰斯 (Rogers Corporation)</span></div>
+<div class="stock-badges">
+<span class="badge badge-portfolio">核心配置</span>
+<span class="score-box">44.50 分</span>
+</div>
+</div>
+<div class="summary-text">1.6T 光模块、CPO 以及高速连接所需的低损耗液晶聚合物 (LCP) 基板与高频特种板材的绝对领导者。由于股价回调超买解除，评分大幅回升。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (8.5/10)</th>
+<td>Critical级 LCP 高频传输树脂及特种板材，1.6T 光模块与 CPO 不可或缺 of 物理介质。</td>
+</tr>
+<tr>
+<th>深厚护城河 (8.5/10)</th>
+<td>高频通信板材专利与技术积累深厚，新进入者门槛高。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (9.50/10)</th>
+<td>PEG 0.52 处于周期底部，且 PB 2.46 &lt;= 2.5，触发周期底部起跑例外条款，估值极具吸引力，股价偏离50日线 15.19% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.5/10)</th>
+<td>机构持股非常集中，近期在底部缩量整理，有明显的 Smart Money 护盘与筑底迹象。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (8.5/10)</th>
+<td>属于低单价、高黏性的核心耗材，客户转换成本高，受价格敏感度低。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 0.52 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 37.75 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 2.46 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 15.19% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">MOD <span class="stock-name">摩丁制造 (Modine Manufacturing)</span></div>
+<div class="stock-badges">
+<span class="badge badge-portfolio">核心配置</span>
+<span class="score-box">44.13 分</span>
+</div>
+</div>
+<div class="summary-text">AI 数据中心高功率密度散热所需的冷却分配单元 (CDU) 稀缺龙头，下游超大型客群抢单，排他性强。液冷核心，坚定持有。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (8.0/10)</th>
+<td>Critical级冷却分配单元 (CDU)，Blackwell 高功率散热核心。</td>
+</tr>
+<tr>
+<th>深厚护城河 (8.5/10)</th>
+<td>定制工程能力强，与超大规模数据中心客户深度绑定。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (9.13/10)</th>
+<td>Forward PEG 1.11 估值明显低估，高增长未被充分定价，股价偏离50日线 -1.49% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.5/10)</th>
+<td>主流机构持续加仓，量价关系极其健康，整理充分。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (9.0/10)</th>
+<td>液冷核心部件供求关系极其紧缺，下游争相签排他性协议锁产能，价格保护力度极强。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.11 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 23.45 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 11.78 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> -1.49% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">BESIY <span class="stock-name">贝思半导体 (Besi)</span></div>
+<div class="stock-badges">
+<span class="badge badge-candidate">优质候选股</span>
+<span class="score-box">43.90 分</span>
+</div>
+</div>
+<div class="summary-text">独占先进封装混合键合 (Hybrid Bonding) 设备市场，是 HBM4 及未来 3D 堆叠良率的物理极极限点。估值回归合理区间。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (9.5/10)</th>
+<td>Bottleneck级先进封装混合键合 (Hybrid Bonding) 设备，HBM4 及未来 3D 堆叠良率的绝对瓶颈。</td>
+</tr>
+<tr>
+<th>深厚护城河 (9.5/10)</th>
+<td>独占混合键合设备市场，专利壁垒与客户先发优势确立绝对护城河。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (6.40/10)</th>
+<td>Forward PEG 1.64 估值偏高，适合持有，限制新开仓，股价偏离50日线 4.05% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (8.5/10)</th>
+<td>欧洲半导体核心资产，长线外资与主权基金持续买入锁定。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (10.0/10)</th>
+<td>几乎独占当前混合键合市场，毛利率维持极高水平，拥有强定价权。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.64 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> N/A </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 50.22 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 4.05% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">FORM <span class="stock-name">福美拓 (FormFactor, Inc.)</span></div>
+<div class="stock-badges">
+<span class="badge badge-portfolio">核心配置</span>
+<span class="score-box">43.29 分</span>
+</div>
+</div>
+<div class="summary-text">HBM 堆叠前筛选缺陷 DRAM Wafer 必不可少的探针卡垄断者，直接受益于 HBM 产能扩张与层数提升。测试耗材核心，继续坚定持有。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (9.0/10)</th>
+<td>Critical/Bottleneck级探针卡测试耗材，HBM 堆叠前 DRAM 晶圆筛选的唯一物理关卡。</td>
+</tr>
+<tr>
+<th>深厚护城河 (9.0/10)</th>
+<td>MEMS 探针技术壁垒，与美光、SK海力士等主流 DRAM 厂深度绑定。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (7.79/10)</th>
+<td>Forward PEG 1.39 估值合理，高增长能有效匹配，股价偏离50日线 15.32% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.0/10)</th>
+<td>机构持仓比重高，近期量价配合健康，呈收缩整理走势。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (8.5/10)</th>
+<td>高黏性、高复购半导体消耗品，客户对测试精确度要求极高，价格竞争压力低。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.39 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 56.15 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 11.54 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 15.32% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">NVMI <span class="stock-name">新星量测 (Nova Ltd.)</span></div>
+<div class="stock-badges">
+<span class="badge badge-candidate">优质候选股</span>
+<span class="score-box">43.03 分</span>
+</div>
+</div>
+<div class="summary-text">半导体工艺中高精度集成与独立光学量测系统的领军者，先进封装及前道量测的关键卡位。与 ONTO 属于同细分领域，受排他性规则限制无法同时持有。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (9.0/10)</th>
+<td>Critical级光学量测，半导体前道与先进封装中高精度量测的领军者。</td>
+</tr>
+<tr>
+<th>深厚护城河 (9.0/10)</th>
+<td>光学量测卡位极佳，软硬件与设备厂商产线高度集成。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (7.53/10)</th>
+<td>Forward PEG 1.46 估值合理，高增长能有效匹配，股价偏离50日线 4.36% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (8.5/10)</th>
+<td>机构配置稳定，走势稳健，处于中线蓄势筑底阶段。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (9.0/10)</th>
+<td>与客户深度定制，毛利率长期维持在 60% 以上，防御性强。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.46 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 42.01 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 13.10 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 4.36% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">KEYS <span class="stock-name">是德科技 (Keysight Technologies)</span></div>
+<div class="stock-badges">
+<span class="badge badge-portfolio">核心配置</span>
+<span class="score-box">42.71 分</span>
+</div>
+</div>
+<div class="summary-text">用于 1.6T 光收发模块、高速 PCIe 接口等高速信号物理层精密测试与合规测试的绝对标准制定者。测试中坚，坚定持有。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (8.0/10)</th>
+<td>Critical级高速信号物理层精密测试仪器，1.6T 光收发与高速接口标准制定者。</td>
+</tr>
+<tr>
+<th>深厚护城河 (9.0/10)</th>
+<td>高端电子测试仪器壁垒，行业标准与软硬件生态壁垒极高，难以被替代。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (7.71/10)</th>
+<td>Forward PEG 1.41 估值合理，高增长能有效匹配，股价偏离50日线 1.42% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.0/10)</th>
+<td>机构长线底仓极其稳定，近期见大资金平稳流入。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (9.0/10)</th>
+<td>高端测试仪器领域竞争格局极佳，产品议价能力强，无价格战风险。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.41 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 29.69 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 9.50 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 1.42% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">ENTG <span class="stock-name">英特格 (Entegris, Inc.)</span></div>
+<div class="stock-badges">
+<span class="badge badge-candidate">优质候选股</span>
+<span class="score-box">42.55 分</span>
+</div>
+</div>
+<div class="summary-text">先进工艺中起关键防缺陷作用的超高纯化学过滤器、特种化学品及高纯输送容器的全球领导者。因估值消化且超买解除，评分大增。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (10.0/10)</th>
+<td>Bottleneck级超高纯化学过滤器与高纯输送容器，先进工艺防缺陷良率控制全球唯一选择。</td>
+</tr>
+<tr>
+<th>深厚护城河 (9.5/10)</th>
+<td>极高材料科学壁垒与客户长期产线认证壁垒，基本无替代可能。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (4.05/10)</th>
+<td>Forward PEG 1.98 估值偏高，适合持有，限制新开仓，但由于近期股价大涨偏离50日线达 20.51%，触发短期超买惩罚扣减 1.5 分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.5/10)</th>
+<td>机构高度重仓，走势强劲，呈现大资金持续建仓的良性爬升态势。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (9.5/10)</th>
+<td>核心高复购耗材，对良率影响极大但占总成本低，客户对价格不敏感，定价权高。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.98 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 38.46 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 6.69 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 20.51% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class="penalty-text" class_="metric-val"> ⚠️ -1.5分 (短期严重超买)</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">VRT <span class="stock-name">维谛技术 (Vertiv Holdings Co)</span></div>
+<div class="stock-badges">
+<span class="badge badge-candidate">优质候选股</span>
+<span class="score-box">41.80 分</span>
+</div>
+</div>
+<div class="summary-text">全球数据中心电力分配与冷却系统的巨头，提供高功率散热与不间断电源整体解决方案。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (8.5/10)</th>
+<td>Critical级数据中心电源与高功率冷却系统，AI 算力中心能源效率的核心。</td>
+</tr>
+<tr>
+<th>深厚护城河 (8.5/10)</th>
+<td>规模化制造优势，全球庞大的服务及销售网络，客户替换成本高。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (7.30/10)</th>
+<td>Forward PEG 1.52 估值合理，高增长能有效匹配，股价偏离50日线 2.71% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.0/10)</th>
+<td>机构高度重仓，走势为典范的上升通道，筹码结构健康。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (8.5/10)</th>
+<td>整体解决方案极具粘性，但面临其他电气设备巨头（如 Eaton）的温和同业竞争。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.52 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 37.70 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 32.38 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 2.71% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">MPWR <span class="stock-name">芯源系统 (Monolithic Power Systems)</span></div>
+<div class="stock-badges">
+<span class="badge badge-candidate">优质候选股</span>
+<span class="score-box">41.18 分</span>
+</div>
+</div>
+<div class="summary-text">先进 GPU 供电系统（如 Blackwell/Rubin 架构）所需的超高功率密度电源管理芯片与模块垄断者。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (8.5/10)</th>
+<td>Critical级超高功率密度电源管理芯片与模块，Blackwell 等大功率 GPU 供电系统核心。</td>
+</tr>
+<tr>
+<th>深厚护城河 (8.5/10)</th>
+<td>拥有专利的高集成度电源设计，技术领先同行 1-2 代。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (6.18/10)</th>
+<td>Forward PEG 1.73 估值偏高，适合持有，限制新开仓，股价偏离50日线 -11.35% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.5/10)</th>
+<td>机构持仓密集，量价健康，回调中未见机构恐慌性抛售。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (8.5/10)</th>
+<td>凭借技术代差在 Blackwell 供电模块中卡位极佳，但需防范 TI 等传统电源巨头中长期的拼单竞争。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.73 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 45.30 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 18.36 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> -11.35% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">MKSI <span class="stock-name">万机仪器 (MKS Inc.)</span></div>
+<div class="stock-badges">
+<span class="badge badge-candidate">优质候选股</span>
+<span class="score-box">41.05 分</span>
+</div>
+</div>
+<div class="summary-text">提供先进光刻、沉积和蚀刻工艺所需的超精密激光器、真空系统与射频电源子系统。目前仍处于短期偏离度超买惩罚中。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (8.0/10)</th>
+<td>Critical级超精密激光器与真空射频电源，先进光刻与蚀刻设备的底层核心零部件。</td>
+</tr>
+<tr>
+<th>深厚护城河 (8.5/10)</th>
+<td>半导体核心零部件的极高壁垒，占据全球主要半导体设备厂供应链。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (6.55/10)</th>
+<td>Forward PEG 1.32 估值合理，高增长能有效匹配，但由于近期股价大涨偏离50日线达 36.94%，触发短期超买惩罚扣减 1.5 分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.5/10)</th>
+<td>机构大额扫货，日K线呈加速上行状态，大资金建仓极其明显。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (8.5/10)</th>
+<td>关键零部件独占性高，随设备厂需求增长而具备良好转嫁成本能力。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.32 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 29.54 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 10.69 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 36.94% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class="penalty-text" class_="metric-val"> ⚠️ -1.5分 (短期严重超买)</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">KLAC <span class="stock-name">科磊 (KLA Corporation)</span></div>
+<div class="stock-badges">
+<span class="badge badge-candidate">优质候选股</span>
+<span class="score-box">39.50 分</span>
+</div>
+</div>
+<div class="summary-text">全球晶圆前道检测设备的绝对垄断者，控制着半导体制造的基准良率。由于股价过度偏离50日线，被罚分且估值偏高，适合观望回调。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (9.5/10)</th>
+<td>Bottleneck级晶圆前道量测与检测设备绝对垄断者，半导体制造良率控制的核心基石。</td>
+</tr>
+<tr>
+<th>深厚护城河 (10.0/10)</th>
+<td>在晶圆缺陷检测领域拥有无可挑战的垄断地位，专利与客户壁垒坚不可摧。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (1.00/10)</th>
+<td>Forward PEG 2.57 估值严重泡沫化，建议止盈/清仓，但由于近期股价大涨偏离50日线达 46.53%，触发短期超买惩罚扣减 1.5 分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.0/10)</th>
+<td>机构长期底仓稳定，但高位量能异常放大，显示部分大资金在派发获利盘。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (10.0/10)</th>
+<td>设备垄断定价权极强，不受任何价格战威胁，毛利率极高。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 2.57 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 59.49 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 67.62 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 46.53% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class="penalty-text" class_="metric-val"> ⚠️ -1.5分 (短期严重超买)</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">ESI <span class="stock-name">爱力盟特 (Element Solutions)</span></div>
+<div class="stock-badges">
+<span class="badge badge-candidate">优质候选股</span>
+<span class="score-box">39.00 分</span>
+</div>
+</div>
+<div class="summary-text">提供先进封装（如混合键合、凸点制造）所需的超高纯电镀化学品与工艺材料，高黏性高频复购，因传统业务占比偏多被稀释纯度。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (7.0/10)</th>
+<td>Critical级先进封装工艺化学品，但由于公司属于大型综合化工集团，AI营收纯度受传统业务稀释，扣 1.0 分。</td>
+</tr>
+<tr>
+<th>深厚护城河 (8.5/10)</th>
+<td>湿化学电镀配方专利及长期产线认证，客户轻易不作更换。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (6.00/10)</th>
+<td>Forward PE 23.1x，PB 4.22x，估值温和偏高，受周期上行预期支撑，股价偏离50日线 11.26% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.5/10)</th>
+<td>化学巨头股权高度集中，大资金锁定良好，近期图形呈温和整理。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (8.0/10)</th>
+<td>耗材粘性高，但由于非单一供应商，面临来自其他特种化学品公司的温和竞争。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> N/A </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 23.09 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 4.22 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 11.26% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">COHR <span class="stock-name">高意 (Coherent Corp.)</span></div>
+<div class="stock-badges">
+<span class="badge badge-watchlist">观察标的</span>
+<span class="score-box">37.40 分</span>
+</div>
+</div>
+<div class="summary-text">高速光模块（如 800G/1.6T）及相关核心光电器件供应商。估值虽低，但下游客户过于强势且同业拼价严重，毛利波动大，未达38分建仓线。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (7.5/10)</th>
+<td>Critical级 800G/1.6T 光模块及核心光电器件，但光模块产业链偏下游，纯度中等。</td>
+</tr>
+<tr>
+<th>深厚护城河 (7.5/10)</th>
+<td>具备从磷化铟光芯片到模块的垂直整合能力，但行业代际迭代快，壁垒不够高。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (9.40/10)</th>
+<td>Forward PEG 0.92 估值明显低估，高增长未被充分定价，股价偏离50日线 6.12% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (8.5/10)</th>
+<td>机构配置尚可，但板块波动巨大，资金进出较为频繁。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (4.5/10)</th>
+<td>极其致命的弱点。下游 Hyperscaler 客户极度强势，同业低价竞争激烈，毛利率存在巨大挤压风险，无定价权。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 0.92 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 47.85 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 7.17 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 6.12% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">NVT <span class="stock-name">埃文特 (nVent Electric plc)</span></div>
+<div class="stock-badges">
+<span class="badge badge-watchlist">观察标的</span>
+<span class="score-box">36.28 分</span>
+</div>
+</div>
+<div class="summary-text">提供数据中心高密度机架、智能配电单元及机柜液冷连接管道，属于电网硬件关键卡位。因整体业务中传统电气占比较多，纯度被稀释。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (7.0/10)</th>
+<td>Critical级机架机柜，整体业务中传统电气占比较多，纯度被稀释，扣 1.0 分。</td>
+</tr>
+<tr>
+<th>深厚护城河 (7.5/10)</th>
+<td>依赖工程分销渠道与安规认证壁垒，物理壁垒低于液冷CDU。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (6.28/10)</th>
+<td>Forward PEG 1.69 估值偏高，适合持有，限制新开仓，股价偏离50日线 3.65% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (9.0/10)</th>
+<td>机构底仓稳定，图形处于高位良性横盘中。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (6.5/10)</th>
+<td>机柜/机架同质化程度高于 CDU，面临一定同业竞争，毛利率承压。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 1.69 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 29.92 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 7.19 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> 3.65% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div><div class="stock-card">
+<div class="stock-header">
+<div class="stock-title">CAMT <span class="stock-name">康特科技 (Camtek Ltd.)</span></div>
+<div class="stock-badges">
+<span class="badge badge-watchlist">观察标的</span>
+<span class="score-box">35.00 分</span>
+</div>
+</div>
+<div class="summary-text">提供先进封装与 CMOS 图像传感器的自动光学检测 (AOI) 和量测设备，当前估值严重透支，技术指标走弱，处于观望区。</div>
+<table>
+<tr>
+<th>AI基建上游原材料 (9.0/10)</th>
+<td>Critical级先进封装自动外观缺陷检测 (AOI) 设备。</td>
+</tr>
+<tr>
+<th>深厚护城河 (8.5/10)</th>
+<td>在先进封装检测中具有较好卡位，但综合实力和软件绑定程度弱于 ONTO。</td>
+</tr>
+<tr>
+<th>主升浪未完全启动 (2.50/10)</th>
+<td>Forward PEG 3.16 估值严重泡沫化，建议止盈/清仓，股价偏离50日线 -10.40% 处于合理范围，无超买扣分。</td>
+</tr>
+<tr>
+<th>机构建仓痕迹 (7.0/10)</th>
+<td>股价技术形态呈破位下行，近期有机构资金净流出迹象。</td>
+</tr>
+<tr>
+<th>定价权与防价格战 (8.0/10)</th>
+<td>面临来自 ONTO、中科飞测等同业竞争，但封装检测设备的客户黏性依然存在。</td>
+</tr>
+</table>
+<div class="metrics-bar"><div class_="metric-item"><span class_="metric-label">Forward PEG:</span><span class_="metric-val"> 3.16 </span></div><div class_="metric-item"><span class_="metric-label">Forward PE:</span><span class_="metric-val"> 35.39 </span></div><div class_="metric-item"><span class_="metric-label">PB Ratio:</span><span class_="metric-val"> 10.80 </span></div><div class_="metric-item"><span class_="metric-label">50日均线偏离:</span><span class_="metric-val"> -10.40% </span></div><div class_="metric-item"><span class_="metric-label">偏离度惩罚:</span><span class_="metric-val"> 无</span></div></div>
+</div></body>
 </html>
